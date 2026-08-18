@@ -47,12 +47,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ehan.kalkulator.ui.navigation.AppNavigation
+import com.ehan.kalkulator.ui.theme.kalkulatorTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            KalkulatorTheme {
+            val preferences by KalkulatorApplication.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
+            KalkulatorTheme(
+                themeMode = preferences.themeMode,
+                palette = preferences.palette,
+                dynamicColor = preferences.dynamicColor
+            ) {
                 KalculatorScreen()
             }
         }
