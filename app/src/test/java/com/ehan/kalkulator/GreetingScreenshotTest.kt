@@ -3,7 +3,7 @@ package com.ehan.kalkulator
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
 import com.ehan.kalkulator.ui.screens.catalog.ComponentCatalogScreen
-import com.ehan.kalkulator.ui.theme.kalkulatorTheme
+import com.ehan.kalkulator.ui.theme.KalkulatorTheme
 import com.github.takahirom.roborazzi.RobolectricDeviceQualifiers
 import com.github.takahirom.roborazzi.captureRoboImage
 import org.junit.Rule
@@ -23,7 +23,7 @@ class GreetingScreenshotTest {
   @Test
   fun greeting_screenshot() {
     composeTestRule.setContent {
-      kalkulatorTheme {
+      KalkulatorTheme {
         ComponentCatalogScreen()
       }
     }

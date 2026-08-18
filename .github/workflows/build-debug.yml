@@ -28,6 +28,12 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
+      - name: Create Google Services JSON File
+        env:
+          GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          echo "$GOOGLE_SERVICES_SECRET" | base64 --decode > app/google-services.json
+
       - name: Restore Debug Keystore
         env:
           DEBUG_KEYSTORE_BASE64: ${{ secrets.DEBUG_KEYSTORE_BASE64 }}
@@ -76,3 +82,17 @@ jobs:
           path: app/build/reports/tests/testDebugUnitTest/
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: Upload Screenshot Greeting
+        uses: actions/upload-artifact@v6
+        with:
+          name: Greeting.png
+          path: app/src/test/screenshots/greeting.png
+          if-no-files-found: ignore
+
+      - name: Upload Screenshot Greetings
+        uses: actions/upload-artifact@v6
+        with:
+          name: Greetings
+          path: app/src/test/screenshots/*.png
+          if-no-files-found: ignore
