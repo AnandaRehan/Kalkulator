@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-  namespace = "com.example"
+  namespace = "com.ehan.kalkulator"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
 
   defaultConfig {
-    applicationId = "com.aistudio.apptemplate.kxmpzq"
+    applicationId = "com.ehan.kalkulator"
     minSdk = 24
     targetSdk = 36
     versionCode = 1
