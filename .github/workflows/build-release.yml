@@ -108,7 +108,7 @@ jobs:
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.build_bundle }}
         uses: actions/upload-artifact@v6
         with:
-          name: app-release-bundle
+          name: Kalkulator-release-bundle
           path: app/build/outputs/bundle/release/*.aab
           if-no-files-found: warn
           retention-days: 30

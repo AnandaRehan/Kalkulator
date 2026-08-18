@@ -63,7 +63,7 @@ jobs:
       - name: Upload Debug APK
         uses: actions/upload-artifact@v6
         with:
-          name: app-debug-apk
+          name: Kalkulator-debug-apk
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 14
