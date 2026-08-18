@@ -48,7 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ehan.kalkulator.ui.navigation.AppNavigation
-import com.ehan.kalkulator.ui.theme.kalkulatorTheme
+import com.ehan.kalkulator.ui.theme.KalkulatorTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
