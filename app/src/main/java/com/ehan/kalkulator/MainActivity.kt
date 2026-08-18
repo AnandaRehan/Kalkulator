@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
 }
 
 */
-package com.ehan.kalculator
+package com.ehan.kalkulator
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -60,14 +60,14 @@ class MainActivity : ComponentActivity() {
                 palette = preferences.palette,
                 dynamicColor = preferences.dynamicColor
             ) {
-                KalculatorScreen()
+                KalkulatorScreen()
             }
         }
     }
 }
 
 @Composable
-fun KalculatorScreen() {
+fun KalkulatorScreen() {
     var expression by rememberSaveable { mutableStateOf("") }
     var result by rememberSaveable { mutableStateOf("") }
 

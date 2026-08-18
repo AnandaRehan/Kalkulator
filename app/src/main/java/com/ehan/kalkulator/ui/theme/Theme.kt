@@ -213,7 +213,7 @@ private fun createDarkColorScheme(palette: AppColorPalette): androidx.compose.ma
 }
 
 @Composable
-fun kalkulatorTheme(
+fun KalkulatorTheme(
     themeMode: ThemeMode = ThemeMode.SYSTEM,
     palette: AppColorPalette = AppColorPalette.POLISH,
     dynamicColor: Boolean = false,
