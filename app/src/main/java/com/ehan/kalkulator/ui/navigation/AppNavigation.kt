@@ -30,7 +30,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.ehan.kalkulator.kalkulatorApplication
+import com.ehan.kalkulator.KalkulatorApplication
 import com.ehan.kalkulator.ui.screens.catalog.ComponentCatalogScreen
 import com.ehan.kalkulator.ui.screens.dashboard.DashboardScreen
 import com.ehan.kalkulator.ui.screens.dashboard.DashboardViewModel
@@ -42,7 +42,7 @@ import com.ehan.kalkulator.ui.screens.settings.SettingsViewModel
 @Composable
 fun AppNavigation(
     navController: NavHostController = rememberNavController(),
-    app: kalkulatorApplication = kalkulatorApplication.instance,
+    app: KalkulatorApplication = KalkulatorApplication.instance,
     modifier: Modifier = Modifier
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
