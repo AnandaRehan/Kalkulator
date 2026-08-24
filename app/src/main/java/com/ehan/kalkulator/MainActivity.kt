@@ -77,9 +77,10 @@ fun KalkulatorScreen() {
 
     Column(
         modifier = Modifier
-            .fillMaxSize() 
+            .fillMaxSize()
+            .systemBarsPadding() // Membatasi agar tidak tertutup tombol navigasi HP
             .padding(16.dp),
-        verticalArrangement = Arrangement.Bottom 
+        verticalArrangement = Arrangement.Bottom
     ) {
         // 🖥️ Layar Ekspresi & Hasil
         Column(
@@ -88,11 +89,19 @@ fun KalkulatorScreen() {
                 .padding(bottom = 24.dp),
             horizontalAlignment = Alignment.End
         ) {
-            Text(text = expression, fontSize = 28.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Text(text = result, fontSize = 40.sp, style = MaterialTheme.typography.headlineLarge)
+            Text(
+                text = if (expression.isEmpty()) "0" else expression, 
+                fontSize = 28.sp, 
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                text = result, 
+                fontSize = 40.sp, 
+                style = MaterialTheme.typography.headlineLarge
+            )
         }
 
-        // 🔘 Grid Tombol Kalkulator (4x4)
+        // 🔘 Grid Tombol Kalkulator
         val buttons = listOf(
             listOf("C", "(", ")", "÷"),
             listOf("7", "8", "9", "×"),
@@ -131,12 +140,42 @@ fun KalkulatorScreen() {
                         },
                         modifier = Modifier
                             .weight(1f)
-                            .height(64.dp)
+                            .height(60.dp)
                     ) {
                         Text(text = symbol, fontSize = 20.sp)
                     }
                 }
             }
+        }
+
+        Text(
+            text = "Theme Mode",
+            style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.SemiBold
+        )
+        
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            ThemeModeOption(
+                title = "System",
+                isSelected = uiState.preferences.themeMode == ThemeMode.SYSTEM,
+                onClick = { onSetThemeMode(ThemeMode.SYSTEM) },
+                modifier = Modifier.weight(1f)
+            )
+            ThemeModeOption(
+                title = "Light",
+                isSelected = uiState.preferences.themeMode == ThemeMode.LIGHT,
+                onClick = { onSetThemeMode(ThemeMode.LIGHT) },
+                modifier = Modifier.weight(1f)
+            )
+            ThemeModeOption(
+                title = "Dark",
+                isSelected = uiState.preferences.themeMode == ThemeMode.DARK,
+                onClick = { onSetThemeMode(ThemeMode.DARK) },
+                modifier = Modifier.weight(1f)
+            )
         }
     }
 }
@@ -145,9 +184,10 @@ fun KalkulatorScreen() {
 fun calculateResult(expr: String): String {
     return try {
         if (expr.isEmpty()) return ""
-        val sanitized = expr.replace("×", "*").replace("÷", "/")
+        // Membersihkan operator di akhir jika user lupa memasukkan angka (misal: "3+6+")
+        val cleanExpr = expr.trimEnd('+', '-', '*', '/', '×', '÷')
+        val sanitized = cleanExpr.replace("×", "*").replace("÷", "/")
         
-        // Pemisahan angka dan operator
         val tokens = mutableListOf<String>()
         var numberBuffer = ""
         for (char in sanitized) {
@@ -163,7 +203,9 @@ fun calculateResult(expr: String): String {
         }
         if (numberBuffer.isNotEmpty()) tokens.add(numberBuffer)
 
-        // Tahap 1: Perkalian & Pembagian
+        if (tokens.isEmpty()) return ""
+
+        // Prioritas 1: Perkalian & Pembagian
         var i = 0
         while (i < tokens.size) {
             if (tokens[i] == "*" || tokens[i] == "/") {
@@ -178,7 +220,7 @@ fun calculateResult(expr: String): String {
             i++
         }
 
-        // Tahap 2: Penjumlahan & Pengurangan
+        // Prioritas 2: Penjumlahan & Pengurangan
         var total = tokens[0].toDouble()
         i = 1
         while (i < tokens.size) {
@@ -191,5 +233,35 @@ fun calculateResult(expr: String): String {
         if (total % 1.0 == 0.0) total.toLong().toString() else total.toString()
     } catch (e: Exception) {
         "Error"
+    }
+}
+
+@Composable
+private fun ThemeModeOption(
+    title: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier
+            .clip(RoundedCornerShape(12.dp))
+            .clickable(onClick = onClick)
+            .testTag("theme_mode_$title"),
+        shape = RoundedCornerShape(12.dp),
+        color = if (isSelected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+        border = if (isSelected) androidx.compose.foundation.BorderStroke(1.5.dp, MaterialTheme.colorScheme.primary) else null
+    ) {
+        Column(
+            modifier = Modifier.padding(vertical = 12.dp, horizontal = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
     }
 }
