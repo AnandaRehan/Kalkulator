@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            val preferences by KalkulatorApplication.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
+            val preferences by Kalkulator.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
             KalkulatorTheme(
                 themeMode = preferences.themeMode,
                 palette = preferences.palette,
