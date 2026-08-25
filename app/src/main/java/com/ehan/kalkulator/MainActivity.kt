@@ -52,10 +52,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -72,29 +74,29 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ehan.kalkulator.ui.navigation.AppNavigation
 import com.ehan.kalkulator.ui.theme.KalkulatorTheme
 import com.ehan.kalkulator.ui.theme.ThemeMode
+import com.ehan.kalkulator.ui.MainViewModel
+import com.ehan.kalkulator.ui.ThemeSelectionScreen
 
 class MainActivity : ComponentActivity() {
+    private val viewModel: MainViewModel by viewModels { MainViewModel.Factory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
         setContent {
-            val preferences by Kalkulator.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
-            KalkulatorTheme(
-                themeMode = preferences.themeMode,
-                palette = preferences.palette,
-                dynamicColor = preferences.dynamicColor
-            ) {
-                KalkulatorScreen()
+            // val preferences by Kalkulator.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
+            KalkulatorTheme {
+                KalkulatorScreen(viewModel = viewModel)
             }
         }
     }
 }
 
 @Composable
-fun KalkulatorScreen() {
+fun KalkulatorScreen(viewModel: MainViewModel) {
     var expression by rememberSaveable { mutableStateOf("") }
     var result by rememberSaveable { mutableStateOf("") }
+    val preferences by Kalkulator.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier
@@ -174,30 +176,8 @@ fun KalkulatorScreen() {
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.SemiBold
         )
-        
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            ThemeModeOption(
-                title = "System",
-                isSelected = uiState.preferences.themeMode == ThemeMode.SYSTEM,
-                onClick = { onSetThemeMode(ThemeMode.SYSTEM) },
-                modifier = Modifier.weight(1f)
-            )
-            ThemeModeOption(
-                title = "Light",
-                isSelected = uiState.preferences.themeMode == ThemeMode.LIGHT,
-                onClick = { onSetThemeMode(ThemeMode.LIGHT) },
-                modifier = Modifier.weight(1f)
-            )
-            ThemeModeOption(
-                title = "Dark",
-                isSelected = uiState.preferences.themeMode == ThemeMode.DARK,
-                onClick = { onSetThemeMode(ThemeMode.DARK) },
-                modifier = Modifier.weight(1f)
-            )
-        }
+
+        ThemeSelectionScreen(viewModel = viewModel)
     }
 }
 
