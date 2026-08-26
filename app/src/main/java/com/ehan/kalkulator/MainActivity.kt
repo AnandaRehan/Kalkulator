@@ -40,6 +40,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -50,7 +51,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.layout.weight
+//import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Button
@@ -71,7 +72,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ehan.kalkulator.ui.navigation.AppNavigation
 import com.ehan.kalkulator.ui.theme.KalkulatorTheme
 import com.ehan.kalkulator.ui.theme.ThemeMode
 import com.ehan.kalkulator.ui.MainViewModel
@@ -96,7 +96,7 @@ class MainActivity : ComponentActivity() {
 fun KalkulatorScreen(viewModel: MainViewModel) {
     var expression by rememberSaveable { mutableStateOf("") }
     var result by rememberSaveable { mutableStateOf("") }
-    val preferences by Kalkulator.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
+   // val preferences by Kalkulator.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier

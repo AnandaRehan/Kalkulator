@@ -3,10 +3,6 @@ package com.ehan.kalkulator
 import android.app.Application
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
-// import com.ehan.kalkulator.data.local.AppDatabase
-import com.ehan.kalkulator.data.repository.AppItemRepository
-import com.ehan.kalkulator.data.repository.AppItemRepositoryImpl
-import com.ehan.kalkulator.data.repository.AppPreferencesRepository
 import androidx.datastore.preferences.preferencesDataStore
 import com.ehan.kalkulator.data.AppDatabase
 import com.ehan.kalkulator.data.ItemRepository

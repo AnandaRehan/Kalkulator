@@ -2,7 +2,6 @@ package com.ehan.kalkulator
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onRoot
-import com.ehan.kalkulator.ui.screens.catalog.ComponentCatalogScreen
 import com.ehan.kalkulator.ui.theme.KalkulatorTheme
 import com.github.takahirom.roborazzi.RobolectricDeviceQualifiers
 import com.github.takahirom.roborazzi.captureRoboImage
@@ -15,7 +14,7 @@ import org.robolectric.annotation.GraphicsMode
 
 @RunWith(RobolectricTestRunner::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
-@Config(qualifiers = RobolectricDeviceQualifiers.Pixel8, sdk = [34])
+@Config(qualifiers = RobolectricDeviceQualifiers.Pixel8, sdk = [36])
 class GreetingScreenshotTest {
 
   @get:Rule val composeTestRule = createComposeRule()
@@ -24,11 +23,10 @@ class GreetingScreenshotTest {
   fun greeting_screenshot() {
     composeTestRule.setContent {
       KalkulatorTheme {
-        ComponentCatalogScreen()
+        Greeting("Robolectric")
       }
     }
 
     composeTestRule.onRoot().captureRoboImage(filePath = "src/test/screenshots/greeting.png")
   }
 }
-

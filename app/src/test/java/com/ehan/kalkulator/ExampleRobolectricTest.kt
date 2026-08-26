@@ -7,10 +7,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import com.ehan.kalkulator.R
+// import com.ehan.kalkulator.R
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
+@Config(sdk = [36])
 class ExampleRobolectricTest {
 
   @Test
