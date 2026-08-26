@@ -266,7 +266,7 @@ private fun ThemeModeOption(
 @Preview(showBackground = true)
 @Composable
 fun KalkulatorScreenPreview() {
-    private val viewModel: MainViewModel by viewModels { MainViewModel.Factory }
+    val viewModel: MainViewModel by viewModels { MainViewModel.Factory }
     KalkulatorTheme {
         KalkulatorScreen(viewModel = viewModel)
     }
