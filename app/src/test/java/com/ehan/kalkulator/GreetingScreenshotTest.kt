@@ -22,9 +22,7 @@ class GreetingScreenshotTest {
   @Test
   fun greeting_screenshot() {
     composeTestRule.setContent {
-      KalkulatorTheme {
-        Greeting("Robolectric")
-      }
+      KalkulatorScreenPreview()
     }
 
     composeTestRule.onRoot().captureRoboImage(filePath = "src/test/screenshots/greeting.png")

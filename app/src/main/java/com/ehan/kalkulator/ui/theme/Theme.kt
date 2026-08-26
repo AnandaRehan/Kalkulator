@@ -222,7 +222,7 @@ fun KalkulatorTheme(
     val darkTheme = when (themeMode) {
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
-        else -> isSystemInDarkTheme()
+        else -> isSystemInDarkTheme() ?: false
     }
 
     val context = LocalContext.current

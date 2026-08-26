@@ -57,6 +57,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.Composable
@@ -71,6 +72,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ehan.kalkulator.ui.theme.KalkulatorTheme
 import com.ehan.kalkulator.ui.theme.ThemeMode
@@ -172,14 +174,6 @@ fun KalkulatorScreen(viewModel: MainViewModel) {
                 }
             }
         }
-
-        Text(
-            text = "Theme Mode",
-            style = MaterialTheme.typography.labelLarge,
-            fontWeight = FontWeight.SemiBold
-        )
-
-        ThemeSelectionScreen(viewModel = viewModel)
     }
 }
 
@@ -266,5 +260,14 @@ private fun ThemeModeOption(
                 color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun KalkulatorScreenPreview() {
+    private val viewModel: MainViewModel by viewModels { MainViewModel.Factory }
+    KalkulatorTheme {
+        KalkulatorScreen(viewModel = viewModel)
     }
 }
