@@ -23,36 +23,38 @@ fun ThemeSelectionScreen(
     viewModel: MainViewModel,
     modifier: Modifier = Modifier
 ) {
-    val currentThemeMode by viewModel.themeModeState.collectAsState()
+    // Ambil objek AppPreferences terkini
+    val prefs by viewModel.preferencesState.collectAsState()
 
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp)
+        modifier = modifier.fillMaxWidth()
+                   .padding(16.dp)
     ) {
         Text(
             text = "Pilih Tema Aplikasi",
             style = MaterialTheme.typography.titleMedium
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
 
-        // Menggunakan entries (direkomendasikan di Kotlin terbaru menggantikan values())
         ThemeMode.entries.forEach { mode ->
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 4.dp),
+                           .fillMaxWidth()
+                           .padding(vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
-                    selected = (currentThemeMode == mode),
+                    // Bandingkan dengan prefs.themeMode
+                    selected = (prefs.themeMode == mode),
                     onClick = { viewModel.setThemeMode(mode) }
                 )
-                Spacer(modifier = Modifier.width(8.dp))
-                
-                // Jauh lebih bersih! Langsung memanggil properti label dari enum 👈
+                Spacer(
+                    modifier = Modifier.width(8.dp)
+                )
                 Text(
-                    text = mode.label, 
+                    text = mode.label,
                     style = MaterialTheme.typography.bodyLarge
                 )
             }

@@ -84,8 +84,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            // val preferences by Kalkulator.instance.preferencesRepository.preferences.collectAsStateWithLifecycle()
-            KalkulatorTheme {
+            val prefs by viewModel.preferencesState.collectAsState()
+            KalkulatorTheme(
+                themeMode = prefs.themeMode
+            ) {
                 KalkulatorScreen(viewModel = viewModel)
             }
         }
