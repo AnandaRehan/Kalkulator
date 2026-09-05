@@ -58,6 +58,10 @@ jobs:
       - name: Beri Izin Akses Gradle
         run: chmod +x gradlew || true
 
+      - name: Help gradle
+        run: |
+          ./gradlew help || echo "help failed or skipped"
+
       - name: Run Unit Tests
         run: |
           ./gradlew testDebugUnitTest --no-daemon --no-configuration-cache --stacktrace || echo "Unit tests failed or skipped"
