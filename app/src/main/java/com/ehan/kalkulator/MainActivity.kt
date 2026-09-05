@@ -95,7 +95,6 @@ fun KalkulatorApp(
     when (screenPhase) {
         ScreenPhase.MAINKALKULATOR -> {
             KalkulatorScreen(
-                viewModel = viewmodel,
                 onTestScreen = {
                     kalkulatorViewModel.toTestScreen()
                 }
@@ -113,14 +112,10 @@ fun KalkulatorApp(
 @Preview(showBackground = true)
 @Composable
 fun KalkulatorScreenPreview() {
-    val viewmodel: MainViewModel by viewModels {
-        MainViewModel.provideFactory(application)
-    }
     val kalkulatorViewModel: KalkulatorViewModel = viewModel()
-    
+
     KalkulatorTheme {
         KalkulatorScreen(
-            viewModel = viewmodel,
             onTestScreen = {
                 kalkulatorViewModel.toTestScreen()
             }

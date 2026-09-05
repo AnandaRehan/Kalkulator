@@ -23,7 +23,6 @@ import androidx.compose.ui.Modifier
 
 @Comparable
 fun KalkulatorScreen(
-    viewModel: MainViewModel,
     onTestScreen: () -> Unit
 ) {
     Column(
