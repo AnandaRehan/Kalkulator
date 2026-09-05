@@ -51,20 +51,19 @@ import com.ehan.kalkulator.ui.theme.KalkulatorTheme
 import com.ehan.kalkulator.ui.CalculatorScreen
 import com.ehan.kalkulator.ui.KalkulatorScreen
 import com.ehan.kalkulator.ui.MainViewModel
-
 import com.ehan.kalkulator.kalkulator.KalkulatorViewModel
 
 class MainActivity : ComponentActivity() {
     private val viewmodel: MainViewModel by viewModels {
         MainViewModel.provideFactory(application)
     }
-    private val context: Context = LocalContext.current
-    private val lifecycleOwner = LocalLifecycleOwner.current
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val context: Context = LocalContext.current
+            val lifecycleOwner = LocalLifecycleOwner.current
             val userPreferences by viewmodel.userPreferences.collectAsStateWithLifecycle(lifecycleOwner = lifecycleOwner)
             val statusNotification by viewmodel.statusMessage.collectAsStateWithLifecycle(lifecycleOwner = lifecycleOwner)
 
@@ -90,15 +89,6 @@ fun KalkulatorApp(
 
     var refreshScreen: Boolean by rememberSaveable { mutableStateOf(false) }
 
-    fun showMessage(
-        text: String = "",
-        c: Context = context
-    ) {
-        ShowMessage(
-            context = c,
-            text = text
-        )
-    }
     fun _refreshScreen() {
         refreshScreen = !refreshScreen
     }
@@ -123,10 +113,15 @@ fun KalkulatorApp(
 @Preview(showBackground = true)
 @Composable
 fun KalkulatorScreenPreview() {
-    val viewModel: MainViewModel by viewModels {
+    val viewmodel: MainViewModel by viewModels {
         MainViewModel.provideFactory(application)
     }
+    val kalkulatorViewModel: KalkulatorViewModel = viewModel()
+    
     KalkulatorTheme {
-        KalkulatorScreen(viewModel = viewModel)
+        KalkulatorScreen(viewModel = viewmodel),
+        onTestScreen = {
+            kalkulatorViewModel.toTestScreen()
+        }
     }
 }

@@ -16,7 +16,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "us
  *     android:name=".Application"
  *     ... >
  */
-class kalkulator : Application() {
+class Kalkulator : Application() {
 
     lateinit var userPreferencesRepository: UserPreferencesRepository
         private set
