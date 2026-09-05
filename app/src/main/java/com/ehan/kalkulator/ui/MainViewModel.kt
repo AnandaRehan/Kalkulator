@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import com.ehan.kalkulator.ui.theme.ThemeMode
 
 data class UiNotification(
     val id: Long = System.currentTimeMillis(),
