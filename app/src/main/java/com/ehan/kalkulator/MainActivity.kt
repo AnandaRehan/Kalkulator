@@ -48,10 +48,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewModelScope
 import com.ehan.kalkulator.model.ScreenPhase
 import com.ehan.kalkulator.ui.theme.KalkulatorTheme
-import com.ehan.kalkulator.ui.CalkulatorScreen
+import com.ehan.kalkulator.ui.CalculatorScreen
 import com.ehan.kalkulator.ui.KalkulatorScreen
 import com.ehan.kalkulator.ui.MainViewModel
-import com.ehan.kalkulator.ui.ThemeSelectionScreen
+
 import com.ehan.kalkulator.kalkulator.KalkulatorViewModel
 
 class MainActivity : ComponentActivity() {
@@ -112,7 +112,7 @@ fun KalkulatorApp(
             )
         }
         ScreenPhase.TESTSCREEN -> {
-            CalkulatorScreen()
+            CalculatorScreen()
         }
         else -> {
             Text(text = "else")

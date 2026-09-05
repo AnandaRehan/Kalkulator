@@ -1,4 +1,4 @@
-package com.ehan.kalkulator.ui
+package com.ehan.kalkulator.kalkulator
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
