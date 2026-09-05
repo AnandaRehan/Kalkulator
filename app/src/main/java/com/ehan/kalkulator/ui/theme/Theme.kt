@@ -19,12 +19,6 @@ enum class AppColorPalette(val label: String, val primaryColor: Color) {
     VIOLET("Deep Violet", VioletPrimary)
 }
 
-enum class ThemeMode(val label: String) {
-    SYSTEM("System Default"),
-    LIGHT("Light"),
-    DARK("Dark")
-}
-
 private fun createLightColorScheme(palette: AppColorPalette): androidx.compose.material3.ColorScheme {
     return when (palette) {
         AppColorPalette.POLISH -> lightColorScheme(
@@ -212,26 +206,55 @@ private fun createDarkColorScheme(palette: AppColorPalette): androidx.compose.ma
     }
 }
 
+private fun createLightSchema(primary: Color, secondary: Color) = lightColorScheme(
+    primary = primary,
+    secondary = secondary,
+    tertiary = IndigoTertiary,
+    background = Color(0xFFF8F9FA),
+    surface = Color(0xFFFFFFFF),
+    surfaceVariant = Color(0xFFEFF1F5),
+    onPrimary = Color.White,
+    onSecondary = Color.White,
+    onBackground = Color(0xFF191C1E),
+    onSurface = Color(0xFF191C1E)
+)
+
+private fun createDarkSchema(primary: Color, secondary: Color) = darkColorScheme(
+    primary = primary,
+    secondary = secondary,
+    tertiary = IndigoDarkTertiary,
+    background = Color(0xFF111418),
+    surface = Color(0xFF1A1D21),
+    surfaceVariant = Color(0xFF25292E),
+    onPrimary = Color(0xFF0F141C),
+    onSecondary = Color(0xFF0F141C),
+    onBackground = Color(0xFFE2E2E6),
+    onSurface = Color(0xFFE2E2E6)
+)
+
 @Composable
 fun KalkulatorTheme(
-    themeMode: ThemeMode = ThemeMode.SYSTEM,
+    darkTheme: Boolean = false,
     palette: AppColorPalette = AppColorPalette.POLISH,
     dynamicColor: Boolean = false,
-    content: @Composable () -> Unit
+    accentColor: String = "Indigo",
+    content: @Composable () -> Unit,
 ) {
-    val darkTheme = when (themeMode) {
-        ThemeMode.LIGHT -> false
-        ThemeMode.DARK -> true
-        else -> isSystemInDarkTheme() ?: false
+    val context = LocalContext.current
+
+    val (lightPrimary, lightSecondary, darkPrimary, darkSecondary) = when (accentColor) {
+        "Teal" -> listOf(TealPrimary, TealSecondary, TealDarkPrimary, TealSecondary)
+        "Amber" -> listOf(AmberPrimary, AmberSecondary, AmberDarkPrimary, AmberSecondary)
+        "Rose" -> listOf(RosePrimary, RoseSecondary, RoseDarkPrimary, RoseSecondary)
+        else -> listOf(IndigoPrimary, IndigoSecondary, IndigoDarkPrimary, IndigoDarkSecondary)
     }
 
-    val context = LocalContext.current
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-        darkTheme -> createDarkColorScheme(palette)
-        else -> createLightColorScheme(palette)
+        darkTheme -> createDarkSchema(darkPrimary, darkSecondary)
+        else -> createLightSchema(lightPrimary, lightSecondary)
     }
 
     MaterialTheme(
@@ -241,3 +264,4 @@ fun KalkulatorTheme(
         content = content
     )
 }
+

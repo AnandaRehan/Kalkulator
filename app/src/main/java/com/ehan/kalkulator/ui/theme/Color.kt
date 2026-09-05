@@ -53,7 +53,30 @@ val PriorityMedium = Color(0xFFD97706)
 val PriorityLow = Color(0xFF059669)
 
 // Alternate Palettes
-val IndigoPrimary = Color(0xFF4F46E5)
+//val IndigoPrimary = Color(0xFF4F46E5)
 val EmeraldPrimary = Color(0xFF059669)
 val SunsetPrimary = Color(0xFFEA580C)
 val VioletPrimary = Color(0xFF7C3AED)
+
+val IndigoPrimary = Color(0xFF3F51B5)
+val IndigoSecondary = Color(0xFF5C6BC0)
+val IndigoTertiary = Color(0xFF7986CB)
+
+val IndigoDarkPrimary = Color(0xFFC5CAE9)
+val IndigoDarkSecondary = Color(0xFF9FA8DA)
+val IndigoDarkTertiary = Color(0xFF7986CB)
+
+// Teal palette
+val TealPrimary = Color(0xFF00796B)
+val TealSecondary = Color(0xFF26A69A)
+val TealDarkPrimary = Color(0xFF80CBC4)
+
+// Amber palette
+val AmberPrimary = Color(0xFFE65100)
+val AmberSecondary = Color(0xFFFF9800)
+val AmberDarkPrimary = Color(0xFFFFCC80)
+
+// Rose palette
+val RosePrimary = Color(0xFFC2185B)
+val RoseSecondary = Color(0xFFE91E63)
+val RoseDarkPrimary = Color(0xFFF48FB1)
