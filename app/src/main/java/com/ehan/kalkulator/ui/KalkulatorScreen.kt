@@ -21,7 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
-@Comparable
+@Composable
 fun KalkulatorScreen(
     onTestScreen: () -> Unit
 ) {
