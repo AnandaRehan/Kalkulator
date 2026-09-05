@@ -22,6 +22,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "App Template"
+rootProject.name = "Kalkulator"
 
 include(":app")
