@@ -119,9 +119,11 @@ fun KalkulatorScreenPreview() {
     val kalkulatorViewModel: KalkulatorViewModel = viewModel()
     
     KalkulatorTheme {
-        KalkulatorScreen(viewModel = viewmodel),
-        onTestScreen = {
-            kalkulatorViewModel.toTestScreen()
-        }
+        KalkulatorScreen(
+            viewModel = viewmodel,
+            onTestScreen = {
+                kalkulatorViewModel.toTestScreen()
+            }
+        )
     }
 }
